@@ -1,4 +1,5 @@
 #include "esfera_utils.h"
+#include <stdio.h>
 
 float calcula_area(float R){
     return 4 * PI * (R * R);
