@@ -1,23 +1,23 @@
 #include "jogada.h"
+#include "tabuleiro.h"
+#include <stdio.h>
 
 tJogada LeJogada(){
     tJogada jogadaTemp;
 
     scanf("%*[^0-9]");
-    if(scanf("%d %d", &jogadaTemp.x, &jogadaTemp.y) == 2){
-        
-        if((jogadaTemp.x >= 0 && jogadaTemp.x <= 2) && // dentro dos limites do tabuleiro
-            (jogadaTemp.y >= 0 && jogadaTemp.y <= 2)){
+    if(scanf("%d %d", &jogadaTemp.x, &jogadaTemp.y) == 2){       
+        if(EhPosicaoValidaTabuleiro(jogadaTemp.x, jogadaTemp.y)){
             jogadaTemp.sucesso = 1;
         }
         else{
+            printf();
             jogadaTemp.sucesso = 0;
         }
     }
     else{
         jogadaTemp.sucesso = 0;
     }
-
 
     return jogadaTemp;
 }
