@@ -8,10 +8,16 @@ tJogada LeJogada(){
     scanf("%*[^0-9]");
     if(scanf("%d %d", &jogadaTemp.x, &jogadaTemp.y) == 2){       
         if(EhPosicaoValidaTabuleiro(jogadaTemp.x, jogadaTemp.y)){
-            jogadaTemp.sucesso = 1;
+            if(EstaLivrePosicaoTabuleiro){
+                jogadaTemp.sucesso = 1;
+            }
+            else{
+                printf("Posicao invalida (OCUPADA - [%d,%d] )!", jogadaTemp.x, jogadaTemp.y);
+                jogadaTemp.sucesso = 0;
+            }
         }
         else{
-            printf();
+            printf("Posicao invalida (FORA DO TABULEIRO - [%d,%d] )!", jogadaTemp.x, jogadaTemp.y);
             jogadaTemp.sucesso = 0;
         }
     }
