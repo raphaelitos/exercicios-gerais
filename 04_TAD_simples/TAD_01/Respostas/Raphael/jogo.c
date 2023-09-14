@@ -32,13 +32,23 @@ tJogo CriaJogo(){
 }
 
 void ComecaJogo(tJogo jogo){
-    
-    int round = 0;
 
     while(!AcabouJogo(jogo)){
-        round++;
-        jogo.tabuleiro = JogaJogador(SelecionaJogador(jogo, round), jogo.tabuleiro);
+        
+        jogo.tabuleiro = JogaJogador(jogo.jogador1, jogo.tabuleiro);
         ImprimeTabuleiro(jogo.tabuleiro);
+        if(VenceuJogador(jogo.jogador1, jogo.tabuleiro)){
+            printf("JOGADOR 1 Venceu!\n");
+            break;
+        }
+
+        jogo.tabuleiro = JogaJogador(jogo.jogador2, jogo.tabuleiro);
+        ImprimeTabuleiro(jogo.tabuleiro);
+        if(VenceuJogador(jogo.jogador2, jogo.tabuleiro)){
+            printf("JOGADOR 2 Venceu!\n");
+            break;
+        }
+        
 
     }
 }

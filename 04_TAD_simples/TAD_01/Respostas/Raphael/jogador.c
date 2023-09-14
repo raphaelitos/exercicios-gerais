@@ -1,15 +1,7 @@
 #include "jogador.h"
 #include "tabuleiro.h"
 #include "jogada.h"
-
-// if(EstaLivrePosicaoTabuleiro()){
-//                 printf("Jogada [%d,%d]!\n", jogadaTemp.x, jogadaTemp.y);
-//                 jogadaTemp.sucesso = 1;
-//             }
-//             else{
-//                 printf("Posicao invalida (OCUPADA - [%d,%d] )!", jogadaTemp.x, jogadaTemp.y);
-//                 jogadaTemp.sucesso = 0;
-//             }
+#include <stdio.h>
 
 tJogador CriaJogador(int idJogador){
     tJogador jogadorTemp;
@@ -22,29 +14,12 @@ tJogador CriaJogador(int idJogador){
 tTabuleiro JogaJogador(tJogador jogador, tTabuleiro tabuleiro){
     
     tJogada jogada;
-    printf("Jogador %d\n", jogador.id);
+    
     do{
+        printf("Jogador %d\n", jogador.id);
         jogada = LeJogada();
-
-        if(EstaLivrePosicaoTabuleiro(tabuleiro, jogada.x, jogada.y)){
-            printf("Jogada [%d,%d]!\n", jogada.x, jogada.y);
-            jogada.sucesso = 1;
-        }
-        else{
-            printf("Posicao invalida (OCUPADA - [%d,%d] )!", jogada.x, jogada.y);
-            jogada.sucesso = 0;
-        }
-
-    }while(!FoiJogadaBemSucedida(jogada));
-    
-    // printf("Jogador %d\n", jogador.id);
-    // tJogada jogada = LeJogada();
-
-    // while(!FoiJogadaBemSucedida(jogada)){
-    //     jogada = LeJogada(jogada);
-    // }
-    
-    MarcaPosicaoTabuleiro(tabuleiro, jogador.id, ObtemJogadaX(jogada), ObtemJogadaY(jogada));
+        tabuleiro = MarcaPosicaoTabuleiro(tabuleiro, jogador.id, ObtemJogadaX(jogada), ObtemJogadaY(jogada));
+    }while(!EstaMarcadaPosicaoPecaTabuleiro(tabuleiro, ObtemJogadaX(jogada), ObtemJogadaY(jogada), jogador.id));
 
     return tabuleiro;
 }
@@ -56,11 +31,11 @@ int VenceuJogador(tJogador jogador, tTabuleiro tabuleiro){
     
     for(rows = 0; rows < TAM_TABULEIRO; rows++){
         for(cols = 0; cols < TAM_TABULEIRO; cols++){
-            if(EstaMarcadaPosicaoPecaTabuleiro(tabuleiro, cols, rows, jogador.id)){
-                countH++; //verifying rows
+            if(EstaMarcadaPosicaoPecaTabuleiro(tabuleiro, cols, rows, jogador.id)){ //verifying rows
+                countH++; 
             }
-            if(EstaMarcadaPosicaoPecaTabuleiro(tabuleiro, rows, cols, jogador.id)){
-                countV++; //verifying cols
+            if(EstaMarcadaPosicaoPecaTabuleiro(tabuleiro, rows, cols, jogador.id)){ //verifying cols
+                countV++; 
             }        
         }
         if(countV == 3 || countH == 3) return 1;

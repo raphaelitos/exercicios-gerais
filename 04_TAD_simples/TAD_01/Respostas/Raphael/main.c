@@ -5,8 +5,9 @@ int main(){
     tJogo jogo;
     jogo = CriaJogo();
     
-    ComecaJogo(jogo);
-    ContinuaJogo();
+    do{
+        ComecaJogo(jogo);
+    }while(ContinuaJogo());
 
     return 0;
 }

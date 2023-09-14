@@ -5,8 +5,8 @@ tTabuleiro CriaTabuleiro(){
     tTabuleiro tabTemp;
     
     tabTemp.pecaVazio = '-';
-    tabTemp.peca1 = "X";
-    tabTemp.peca2 = "0";
+    tabTemp.peca1 = 'X';
+    tabTemp.peca2 = '0';
 
     int rows = 0, cols = 0;
     for(rows = 0; rows < TAM_TABULEIRO; rows++){
@@ -22,13 +22,19 @@ tTabuleiro MarcaPosicaoTabuleiro(tTabuleiro tabuleiro, int peca, int x, int y){
     char skin;
     
     if(peca == PECA_1){
-        skin = tabuleiro.peca1;
+        skin = 'X';
     }
     else{
         skin = tabuleiro.peca2;;
     }
     
-    tabuleiro.posicoes[y][x] = skin;
+    if(EstaLivrePosicaoTabuleiro(tabuleiro, x, y)){
+        tabuleiro.posicoes[y][x] = skin;
+        printf("Jogada [%d,%d]!\n", x, y);
+    }
+    else{
+        printf("Posicao invalida (OCUPADA - [%d,%d] )!\n", x, y);
+    }
 
     return tabuleiro;
 }
@@ -74,9 +80,6 @@ void ImprimeTabuleiro(tTabuleiro tabuleiro){
         printf("\t");
         for(j = 0; j <  TAM_TABULEIRO; j++){
             printf("%c", tabuleiro.posicoes[i][j]);
-            if(j < TAM_TABULEIRO - 1){
-                printf(" ");
-            }
         }
         printf("\n");
     }
