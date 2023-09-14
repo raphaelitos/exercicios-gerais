@@ -5,23 +5,13 @@
 tJogada LeJogada(){
     tJogada jogadaTemp;
 
-    scanf("%*[^0-9]");
+    scanf("%*[^0-2]");
     if(scanf("%d %d", &jogadaTemp.x, &jogadaTemp.y) == 2){       
-        if(EhPosicaoValidaTabuleiro(jogadaTemp.x, jogadaTemp.y)){
-            if(EstaLivrePosicaoTabuleiro){
-                jogadaTemp.sucesso = 1;
-            }
-            else{
-                printf("Posicao invalida (OCUPADA - [%d,%d] )!", jogadaTemp.x, jogadaTemp.y);
-                jogadaTemp.sucesso = 0;
-            }
-        }
-        else{
-            printf("Posicao invalida (FORA DO TABULEIRO - [%d,%d] )!", jogadaTemp.x, jogadaTemp.y);
-            jogadaTemp.sucesso = 0;
-        }
+        jogadaTemp.sucesso = 1;
     }
     else{
+        scanf("%*[^\n]");
+        scanf("%*[\n]");
         jogadaTemp.sucesso = 0;
     }
 

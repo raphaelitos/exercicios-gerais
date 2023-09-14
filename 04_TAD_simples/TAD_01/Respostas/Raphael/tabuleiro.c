@@ -4,11 +4,11 @@
 tTabuleiro CriaTabuleiro(){
     tTabuleiro tabTemp;
     
-    int rows = 0, cols = 0;
     tabTemp.pecaVazio = '-';
     tabTemp.peca1 = "X";
     tabTemp.peca2 = "0";
 
+    int rows = 0, cols = 0;
     for(rows = 0; rows < TAM_TABULEIRO; rows++){
         for(cols = 0; cols < TAM_TABULEIRO; cols++){
             tabTemp.posicoes[rows][cols] = tabTemp.pecaVazio;
@@ -38,7 +38,7 @@ int TemPosicaoLivreTabuleiro(tTabuleiro tabuleiro){
 
     for(i = 0; i < TAM_TABULEIRO; i++){
         for(j = 0; j < TAM_TABULEIRO; j++){
-            if(tabuleiro.posicoes[i][j] == tabuleiro.pecaVazio){
+            if(EstaLivrePosicaoTabuleiro(tabuleiro, j, i)){
                 return 1;
             }
         }
@@ -74,7 +74,7 @@ void ImprimeTabuleiro(tTabuleiro tabuleiro){
         printf("\t");
         for(j = 0; j <  TAM_TABULEIRO; j++){
             printf("%c", tabuleiro.posicoes[i][j]);
-            if(j == TAM_TABULEIRO - 1){
+            if(j < TAM_TABULEIRO - 1){
                 printf(" ");
             }
         }
