@@ -28,12 +28,17 @@ tTabuleiro MarcaPosicaoTabuleiro(tTabuleiro tabuleiro, int peca, int x, int y){
         skin = tabuleiro.peca2;;
     }
     
-    if(EstaLivrePosicaoTabuleiro(tabuleiro, x, y)){
-        tabuleiro.posicoes[y][x] = skin;
-        printf("Jogada [%d,%d]!\n", x, y);
+    if(EhPosicaoValidaTabuleiro(x, y)){
+        if(EstaLivrePosicaoTabuleiro(tabuleiro, x, y)){
+            tabuleiro.posicoes[y][x] = skin;
+            printf("Jogada [%d,%d]!\n", x, y);
+        }
+        else{
+            printf("Posicao invalida (OCUPADA - [%d,%d] )!\n", x, y);
+        }
     }
     else{
-        printf("Posicao invalida (OCUPADA - [%d,%d] )!\n", x, y);
+        printf("Posicao invalida (FORA DO TABULEIRO - [%d,%d] )", x, y);
     }
 
     return tabuleiro;
@@ -69,7 +74,7 @@ int EstaLivrePosicaoTabuleiro(tTabuleiro tabuleiro, int x, int y){
 }
 
 int EhPosicaoValidaTabuleiro(int x, int y){
-    return ((x >= 0 && x < TAM_TABULEIRO) && //inside the board
+    return ((x >= 0 && x < TAM_TABULEIRO) &&
             (y >= 0 && y < TAM_TABULEIRO));
 }
 

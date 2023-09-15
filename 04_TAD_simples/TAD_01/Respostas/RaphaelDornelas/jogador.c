@@ -43,11 +43,13 @@ int VenceuJogador(tJogador jogador, tTabuleiro tabuleiro){
     }
     
     if(tabuleiro.posicoes[0][0] == tabuleiro.posicoes[1][1] &&
-        tabuleiro.posicoes[1][1] == tabuleiro.posicoes[2][2]){
+        tabuleiro.posicoes[1][1] == tabuleiro.posicoes[2][2] &&
+        tabuleiro.posicoes[0][0] != tabuleiro.pecaVazio){
         return 1;
     }
     if(tabuleiro.posicoes[0][2] == tabuleiro.posicoes[1][1] &&
-        tabuleiro.posicoes[1][1] == tabuleiro.posicoes[2][0]){
+        tabuleiro.posicoes[1][1] == tabuleiro.posicoes[2][0] &&
+        tabuleiro.posicoes[0][2] != tabuleiro.pecaVazio){
         return 1;
     }
     //diagonals verified
