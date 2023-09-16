@@ -17,6 +17,7 @@ tTabuleiro JogaJogador(tJogador jogador, tTabuleiro tabuleiro){
     
     do{
         printf("Jogador %d\n", jogador.id);
+        printf("Digite uma posicao (x e y):\n");
         jogada = LeJogada();
         tabuleiro = MarcaPosicaoTabuleiro(tabuleiro, jogador.id, ObtemJogadaX(jogada), ObtemJogadaY(jogada));
     }while(!EstaMarcadaPosicaoPecaTabuleiro(tabuleiro, ObtemJogadaX(jogada), ObtemJogadaY(jogada), jogador.id));
@@ -42,14 +43,14 @@ int VenceuJogador(tJogador jogador, tTabuleiro tabuleiro){
         countV = 0, countH = 0; 
     }
     
-    if(tabuleiro.posicoes[0][0] == tabuleiro.posicoes[1][1] &&
-        tabuleiro.posicoes[1][1] == tabuleiro.posicoes[2][2] &&
-        tabuleiro.posicoes[0][0] != tabuleiro.pecaVazio){
+    if(EstaMarcadaPosicaoPecaTabuleiro(tabuleiro, 0, 0, jogador.id)&&
+        EstaMarcadaPosicaoPecaTabuleiro(tabuleiro, 1, 1, jogador.id)&&
+        EstaMarcadaPosicaoPecaTabuleiro(tabuleiro, 2, 2, jogador.id)){
         return 1;
     }
-    if(tabuleiro.posicoes[0][2] == tabuleiro.posicoes[1][1] &&
-        tabuleiro.posicoes[1][1] == tabuleiro.posicoes[2][0] &&
-        tabuleiro.posicoes[0][2] != tabuleiro.pecaVazio){
+    if(EstaMarcadaPosicaoPecaTabuleiro(tabuleiro, 2, 0, jogador.id)&&
+        EstaMarcadaPosicaoPecaTabuleiro(tabuleiro, 1, 1, jogador.id)&&
+        EstaMarcadaPosicaoPecaTabuleiro(tabuleiro, 0, 2, jogador.id)){
         return 1;
     }
     //diagonals verified

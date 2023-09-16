@@ -22,7 +22,7 @@ tTabuleiro MarcaPosicaoTabuleiro(tTabuleiro tabuleiro, int peca, int x, int y){
     char skin;
     
     if(peca == PECA_1){
-        skin = 'X';
+        skin = tabuleiro.peca1;
     }
     else{
         skin = tabuleiro.peca2;;
@@ -38,7 +38,7 @@ tTabuleiro MarcaPosicaoTabuleiro(tTabuleiro tabuleiro, int peca, int x, int y){
         }
     }
     else{
-        printf("Posicao invalida (FORA DO TABULEIRO - [%d,%d] )", x, y);
+        printf("Posicao invalida (FORA DO TABULEIRO - [%d,%d] )\n", x, y);
     }
 
     return tabuleiro;

@@ -30,8 +30,11 @@ void ComecaJogo(tJogo jogo){
             printf("JOGADOR 2 Venceu!\n");
             break;
         }
-        
 
+        if(AcabouJogo(jogo)){
+            printf("Sem vencedor!\n");
+            break;
+        }
     }
 }
 
@@ -40,7 +43,7 @@ int AcabouJogo(tJogo jogo){
 }
 
 int ContinuaJogo(){
-    printf("Jogar novamente? (s,n) ");
+    printf("Jogar novamente? (s,n)\n");
     
     char resposta = '\0';
     scanf("%*[^ns]");
