@@ -24,8 +24,9 @@ int main(){
         scanf("%d", &option);
         
         if(option == 1){
+            int result[rows1][cols1];
             if(possible_matrix_sum(rows1, cols1, rows2, cols2)){
-                matrix_add(rows1, cols1, matrix1, rows2, cols2, matrix2, matrix1);
+                matrix_add(rows1, cols1, matrix1, rows2, cols2, matrix2, result);
             }
             else{
                 ErrorMessage();
@@ -33,8 +34,9 @@ int main(){
         }
         
         else if(option == 2){
+            int result[rows1][cols1];
             if(possible_matrix_sub(rows1, cols1, rows2, cols2)){
-                matrix_sub(rows1, cols1, matrix1, rows2, cols2, matrix2, matrix1);
+                matrix_sub(rows1, cols1, matrix1, rows2, cols2, matrix2, result);
             }
             else{
                 ErrorMessage();
