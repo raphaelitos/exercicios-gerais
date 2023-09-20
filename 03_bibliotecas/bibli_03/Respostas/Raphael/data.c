@@ -69,17 +69,17 @@ void imprimeDataExtenso(int dia, int mes, int ano){
 
 int verificaBissexto(int ano){
 
-    if(ano % 4){ //nao divisivel por 4
-        return 0;
+    if(!(ano % 400)){
+    	return 1;
     }
-
-    if(!(ano % 100)){//divisivel por 4 e 100
-        if(ano % 400){
-            return 0;
-        }
+    if(!(ano % 100)){
+    	return 0;
+    }
+    if(!(ano % 4)){
+    	return 1;
     }
    
-    return 1;
+    return 0;
 }
 
 int numeroDiasMes(int mes, int ano){
