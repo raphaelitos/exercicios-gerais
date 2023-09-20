@@ -1,5 +1,3 @@
-//TA FALTANDO A FUNCAO MAIS IMPORTANTEKKKKKKKKKKKKKKKKKKKKKKK
-
 #include "data.h"
 #include <stdio.h>
 #include <string.h>
@@ -75,7 +73,7 @@ int verificaBissexto(int ano){
         return 0;
     }
 
-    if(!(ano % 100)){ 
+    if(!(ano % 100)){//divisivel por 4 e 100
         if(ano % 400){
             return 0;
         }
