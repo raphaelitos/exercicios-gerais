@@ -40,7 +40,7 @@ int main(){
     }
 
     if(calculaDiferencaDias(dia1, mes1, ano1, dia2, mes2, ano2) < 10)
-        printf("A diferenca em dias entre as datas eh: %02d dias\n", calculaDiferencaDias(dia1, mes1, ano1, dia2, mes2, ano2));
+        printf("A diferenca em dias entre as datas eh: %.2d dias\n", calculaDiferencaDias(dia1, mes1, ano1, dia2, mes2, ano2));
     else
         printf("A diferenca em dias entre as datas eh: %d dias\n", calculaDiferencaDias(dia1, mes1, ano1, dia2, mes2, ano2));
 
