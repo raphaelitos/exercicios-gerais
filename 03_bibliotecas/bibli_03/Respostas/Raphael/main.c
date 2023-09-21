@@ -15,37 +15,20 @@ int main(){
         exit(0);
     }
 
-    if(comparaData(dia1, mes1, ano1, dia2, mes2, ano2) == 1){
-        // printf("Primeira data: ");
-        // imprimeDataExtenso(dia2, mes2, ano2);
-        // printf("Segunda data: ");
-        // imprimeDataExtenso(dia1, mes1, ano1);
-        // printf("A segunda data eh mais antiga\n");
-        printf("Primeira data: ");
-        imprimeDataExtenso(dia1, mes1, ano1);
-        printf("Segunda data: ");
-        imprimeDataExtenso(dia2, mes2, ano2);
-        printf("A primeira data eh mais antiga\n");
-    }
+    printf("Primeira data: ");
+    imprimeDataExtenso(dia1, mes1, ano1);
+    printf("Segunda data: ");
+    imprimeDataExtenso(dia2, mes2, ano2);
 
-    else if(comparaData(dia1, mes1, ano1, dia2, mes2, ano2) == -1){
-        // printf("Primeira data: ");
-        // imprimeDataExtenso(dia1, mes1, ano1);
-        // printf("Segunda data: ");
-        // imprimeDataExtenso(dia2, mes2, ano2);
-        // printf("A primeira data eh mais antiga\n");
-        printf("Primeira data: ");
-        imprimeDataExtenso(dia2, mes2, ano2);
-        printf("Segunda data: ");
-        imprimeDataExtenso(dia1, mes1, ano1);
+    if(comparaData(dia1, mes1, ano1, dia2, mes2, ano2) == 1){
         printf("A segunda data eh mais antiga\n");
     }
 
+    else if(comparaData(dia1, mes1, ano1, dia2, mes2, ano2) == -1){
+        printf("A primeira data eh mais antiga\n");
+    }
+
     else{
-        printf("Primeira data: ");
-        imprimeDataExtenso(dia2, mes2, ano2);
-        printf("Segunda data: ");
-        imprimeDataExtenso(dia1, mes1, ano1);
         printf("As datas sao iguais\n");
     }
 

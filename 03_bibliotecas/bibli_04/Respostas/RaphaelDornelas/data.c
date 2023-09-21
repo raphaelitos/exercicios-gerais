@@ -3,23 +3,11 @@
 #include <string.h>
 
 int verificaDataValida(int dia, int mes, int ano){
-    if(mes == 2){
-        if(verificaBissexto(ano)){
-            return 0 < dia && dia <= 29;
-        }
-        
-        else{
-            return 0 < dia && dia <= 28;
-        }
-    }
+    return 0 < dia && dia < numeroDiasMes(mes, ano);
+}
 
-    else if(mes == 4 || mes == 6 || mes == 9 || mes == 11){
-        return 0 < dia && dia <= 30;
-    }
-
-    else{
-        return 0 < dia && dia <= 31;
-    }
+void imprimeData(int dia, int mes, int ano){
+    printf("%02d/%02d/%04d", dia, mes, ano);
 }
 
 void imprimeMesExtenso(int mes){
@@ -167,19 +155,35 @@ int calculaDiferencaDias(int dia1, int mes1, int ano1, int dia2, int mes2, int a
         }
     } //calculo anual
     
-    if(mesf - mesi > 0){
+    if(mesf > mesi){
         diferenca += calculaDiasAteMes(mesf, anof) - calculaDiasAteMes(mesi, anoi);
     }
-    else if(mesf - mesi < 0){
+    else if(mesf < mesi){
         diferenca -= calculaDiasAteMes(mesi, anoi) - calculaDiasAteMes(mesf, anof);
     }//calculo mensal
 
-    if(diaf - diai > 0){
+    if(diaf > diai){
         diferenca += diaf - diai;
     }
-    else if(diaf - diai < 0){
+    else if(diaf < diai){
         diferenca -= diai - diaf;
     }//calculo diario
 
     return diferenca;
+}
+
+void imprimeProximaData(int dia, int mes, int ano){
+    
+    if(dia + 1 > numeroDiasMes(mes, ano)){
+        dia = 1;
+        if(mes == 12){
+            mes = 1;
+            ano++;
+        }
+        else{
+            mes++;
+        }
+    }
+    printf("A data seguinte eh:");
+    imprimeData(dia, mes, ano);
 }

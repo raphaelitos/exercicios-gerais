@@ -104,7 +104,7 @@ int numeroDiasMes(int mes, int ano){
 
 int comparaData(int dia1, int mes1, int ano1, int dia2, int mes2, int ano2){
     if(ano1 < ano2){
-        return -1;
+        return (-1);
     }
     if(ano2 <  ano1){
         return 1;
@@ -113,7 +113,7 @@ int comparaData(int dia1, int mes1, int ano1, int dia2, int mes2, int ano2){
     //se chegar aqui, os anos sao iguais
 
     if(mes1 < mes2){
-        return -1;
+        return (-1);
     }
     if(mes2 < mes1){
         return 1;
@@ -122,7 +122,7 @@ int comparaData(int dia1, int mes1, int ano1, int dia2, int mes2, int ano2){
     //meses iguais
 
     if(dia1 < dia2){
-        return -1;
+        return (-1);
     }
     if(dia2 < dia1){
         return 1;
@@ -177,7 +177,7 @@ int calculaDiferencaDias(int dia1, int mes1, int ano1, int dia2, int mes2, int a
     if(diaf - diai > 0){
         diferenca += diaf - diai;
     }
-    else if(diaf - dia1 < 0){
+    else if(diaf - diai < 0){
         diferenca -= diai - diaf;
     }//calculo diario
 
