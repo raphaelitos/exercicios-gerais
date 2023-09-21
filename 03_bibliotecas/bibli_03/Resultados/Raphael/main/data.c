@@ -62,7 +62,7 @@ void imprimeMesExtenso(int mes){
 }
 
 void imprimeDataExtenso(int dia, int mes, int ano){
-    printf("%d de ", dia);
+    printf("%.2d de ", dia);
     imprimeMesExtenso(mes);
     printf(" de %d\n", ano);
 }
@@ -180,44 +180,6 @@ int calculaDiferencaDias(int dia1, int mes1, int ano1, int dia2, int mes2, int a
     else if(diaf - dia1 < 0){
         diferenca -= diai - diaf;
     }//calculo diario
-
-    
-
-    /*if(comparaData(dia1, mes1, ano1, dia2, mes2, ano2) == 1){
-        
-        int a = 0;
-        int anoi = 0, anof = 0, mesi = 0, mesf = 0, diai = 0, diaf = 0;
-        
-        if(ano1 == ano2){
-            if(mes1 == mes2){
-                diferenca = dia1 - dia2;
-            }
-            else{
-                if(dia1 == dia2){
-                    diferenca = mes1 - mes2;
-                }
-                else{ //dias e meses diferentes
-                    diferenca = calculaDiasAteMes(mes1, ano1) - calculaDiasAteMes(mes2, ano2);
-                    diferenca += dia1 - dia2;
-                }
-            }
-        }
-        else{
-            if(mes1 == mes2){
-                diferenca = dia1 - dia2;
-            }
-            else{
-                if(dia1 == dia2){
-                    diferenca = mes1 - mes2;
-                }
-                else{ //dias e meses diferentes
-                    diferenca = calculaDiasAteMes(mes1, ano1) - calculaDiasAteMes(mes2, ano2);
-                    diferenca += dia1 - dia2;
-                }
-            }
-        }
-        
-    }*/
 
     return diferenca;
 }
