@@ -141,10 +141,10 @@ int calculaDiasAteMes(int mes, int ano){
 }
 
 int calculaDiferencaDias(int dia1, int mes1, int ano1, int dia2, int mes2, int ano2){
-    int anoi = 0, anof = 0, mesi = 0, mesf = 0, diai = 0, diaf = 0;
+    int anoi = 0, anof = 0, mesi = 0, mesf = 0, diai = 0, diaf = 0; //generic variables
 
 
-    if(!comparaData(dia1, mes1, ano1, dia2, mes2, ano2)){ //datas iguais
+    if(!comparaData(dia1, mes1, ano1, dia2, mes2, ano2)){ 
         return 0;
     }
     
