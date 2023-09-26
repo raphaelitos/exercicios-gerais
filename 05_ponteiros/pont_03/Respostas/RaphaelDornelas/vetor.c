@@ -1,6 +1,16 @@
 #include "vetor.h"
 #include <stdio.h>
 
+int achaMenorVet(int vet[], int tam){
+    int menor = vet[0];
+    for(int i = 1; i < tam; i++){
+        if(menor < vet[i]){
+            menor = vet[i];
+        }
+    }
+    return menor;
+}
+
 void LeDadosParaVetor(int * vet, int tam){
     for(int pos = 0; pos < tam; pos++){
         scanf("%d", &vet[pos]);
@@ -28,10 +38,10 @@ void TrocaSeAcharMenor(int * vet, int tam, int * paraTrocar){
 }
 
 void OrdeneCrescente(int * vet, int tam){
-    int i = 0;
-    int *pos;
-    pos = &i;
-    for(i = 0; i < tam; i++){
+    int idm = achaMenorVet(vet, tam);
+    
+
+    for(i = 0; i < tam - 1; i++){
         TrocaSeAcharMenor(vet, tam, pos);
     }
 }
