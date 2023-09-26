@@ -26,10 +26,10 @@ void ImprimeDadosDoVetor(int * n, int tam){
 
 void TrocaSeAcharMenor(int * vet, int tam, int * paraTrocar){
     for(int pos = *paraTrocar; pos < tam; pos++){
-        if(vet[pos] < vet[*paraTrocar]){
+        if(vet[pos] < vet[pos + 1]){
             int aux = vet[pos];
-            vet[pos] = vet[*paraTrocar];
-            vet[*paraTrocar] =  aux;
+            vet[pos] = vet[pos + 1];
+            vet[pos + 1] =  aux;
 
             *paraTrocar = pos;
         
@@ -38,10 +38,10 @@ void TrocaSeAcharMenor(int * vet, int tam, int * paraTrocar){
 }
 
 void OrdeneCrescente(int * vet, int tam){
-    int idm = achaMenorVet(vet, tam);
+    int *idm = achaMenorVet(vet, tam);
     
 
-    for(i = 0; i < tam - 1; i++){
-        TrocaSeAcharMenor(vet, tam, pos);
+    for(int i = 0; i < tam - 1; i++){
+        TrocaSeAcharMenor(vet, tam-i-1, &idm);
     }
 }
