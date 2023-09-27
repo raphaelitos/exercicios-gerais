@@ -1,63 +1,184 @@
 #include <stdio.h>
-#include <string.h>
 
+//Estrutura para armazenar uma data
 typedef struct {
-	char nome[100];
-} tTime;
+    int dia; //Dia da data
+    int mes; //Mes da data
+    int ano; //Ano da data
+} tData;
 
-tTime CriaTime(char nome[]){
-	tTime time;
-	strcpy(time.nome, nome);
-	return time;
+//Retorna uma data valida a partir do dia, mes e ano informados
+tData InicializaDataParam( int a_dia, int a_mes, int a_ano);
+
+//Le uma data da entrada padrao 
+//considerando o dia, mes e ano separados por um espaco
+tData LeData( );
+
+//Imprime na saida padrao a data informada 
+void ImprimeData( tData a_data );
+
+//Retorna verdadeiro se o ano for bisexto, ou falso caso contrario
+int EhBissexto( tData a_data );
+
+//Retorna a quantidade de dias contido no mes da data em questao
+int InformaQtdDiasNoMes( tData a_data );
+
+//Retorana o dia postarior ao da data informada
+tData AvancaParaDiaSeguinte( tData a_data );
+
+//Retorna verdadeiro se as datas forem iguais, ou falso caso contrario
+int EhIgual( tData a_data1, tData a_data2 );
+
+//Retorna se a data A for menor do que a B
+int EhMenorDataAqDataB(tData a, tData b);
+
+
+int main()
+{
+    tData data; //Data auxiliar para o FOR
+    tData dataIni; //Data do inicio do intervalo
+    tData dataFim; //Data do fim do intervalo
+
+    //Le a data inicial
+    dataIni = LeData();
+    //Le a data final
+    dataFim = LeData();
+    
+    //Passa por todas as datas do intervalo incluindo dataIni 
+    //e excluindo dataFim
+    for(    data = dataIni; 
+            !EhIgual(data, dataFim); 
+            data = AvancaParaDiaSeguinte(data)){
+        //Imprime a data corrente
+        ImprimeData(data);
+        printf("\n");
+    }
+    
+    return 0;
 }
 
-void ImprimeTime(tTime * time){
-	printf("%s", time->nome);
+tData InicializaDataParam( int a_dia, int a_mes, int a_ano )                                               
+{
+    tData data;
+    int qtdDiasNoMes;
+
+    data.ano = a_ano;
+
+    //Garante que o mes esta entre 1 e 12
+    if (a_mes > 12){
+        a_mes = 12;
+    } else if (a_mes < 1){
+        a_mes = 1;
+    }
+    data.mes = a_mes;
+
+    //Garante que o dia esta dentro dos limites permitidos para o mes
+    qtdDiasNoMes = InformaQtdDiasNoMesMA(a_mes, a_ano);
+    if ( a_dia > qtdDiasNoMes ){
+        a_dia = qtdDiasNoMes;
+    } else if (a_dia < 1){
+        a_dia = 1;
+    }
+    data.dia = a_dia;
+    
+    return data;
 }
 
-typedef struct {
-	char nome[100];
-	tTime * time;
-} tTorcedor;
-
-tTorcedor CriaTorcedor(char nome[], tTime *time){
-	tTorcedor torcedor;
-	strcpy(torcedor.nome, nome);
-	torcedor.time = time;
-	return torcedor;
+tData LeData( )                                               
+{
+    tData dataRtn;
+    int d, m, a;
+    //Le a data do teclado
+    //OBS:Se nao for para o BOCA, pode ter um printf pedindo para digitar a data
+    if ( scanf("%d %d %d", &d, &m, &a) != 3 ){
+        printf("ERRO: Formato de entrada nao compativel!\n");
+        exit(1); 
+    }
+    
+    //Inicializa a data e garante q eh vailida
+    dataRtn = InicializaDataParam( d, m, a );
+    
+    return dataRtn;
 }
 
-void ImprimeTorcedor(tTorcedor * torcedor){
-	printf("%s torce para ", torcedor->nome);
-	ImprimeTime(torcedor->time);
-	printf("\n");
+void ImprimeData( tData a_data )                                               
+{
+    printf("'%02d/%02d/%04d'", a_data.dia, a_data.mes, a_data.ano);
 }
 
-int main(){
-	int ti = 3;
-	tTime times[ti];
-	times[0] = CriaTime("Piracicaba");
-	times[1] = CriaTime("Estrela");
-	times[2] = CriaTime("Rio Branco");
-	
-	int to = 5;
-	tTorcedor torcedores[to];
-	torcedores[0] = CriaTorcedor("Chapolin", &times[0]);
-	torcedores[1] = CriaTorcedor("Seu Madruga", &times[2]);
-	torcedores[2] = CriaTorcedor("Chaves", &times[1]);
-	torcedores[3] = CriaTorcedor("Chiquinha", &times[0]);
-	torcedores[4] = CriaTorcedor("Kiko", &times[2]);
-	
-	printf("Imprime torcedores:\n");
-	for(int i = 0; i < to; i++){
-		ImprimeTorcedor(&torcedores[i]);
-	}
+//Funcao auxiliar para verificar se o ano e bisexto
+int EhBissextoAno( int a_ano )                                               
+{
+    if ( !(a_ano%400) ){
+        return 1;
+    }
+    if ( !(a_ano%100) ){
+        return 0;
+    }
+    if ( !(a_ano%4) ){
+        return 1;
+    }
+    return 0;
+}
 
-	printf("\n");
-	printf("Imprime times:\n");
-	for(int i = 0; i < ti; i++){
-		ImprimeTime(&times[i]);
-		printf("\n");
-	}
+int EhBissexto( tData a_data )                                               
+{
+    int rtn;
+    rtn = EhBissextoAno(a_data.ano);
+    return rtn;
+}
+
+//Funcao auxiliar para informar a quantidade de dias no mes, dado o mes e o ano
+int InformaQtdDiasNoMesMA( int a_mes, int a_ano )                                               
+{
+    if ( a_mes == 4 || a_mes == 6 || a_mes == 9 || a_mes == 11){
+        return 30;
+    }
+    if ( a_mes == 2 ){
+        if ( EhBissextoAno(a_ano) ){
+            return 29;
+        }
+        return 28;
+    }
+    return 31;
+}
+
+int InformaQtdDiasNoMes( tData a_data )                                               
+{
+    int rtn;
+    rtn = InformaQtdDiasNoMesMA(a_data.mes, a_data.ano);
+    return rtn;
+}
+
+tData AvancaParaDiaSeguinte( tData a_data )                                               
+{
+    if ( a_data.dia < InformaQtdDiasNoMes(a_data) ){
+        a_data.dia++;
+    } else {
+        a_data.dia = 1;
+        if ( a_data.mes < 12 ){
+            a_data.mes++;
+        } else {
+            a_data.mes = 1;
+            a_data.ano++;
+        }
+    }
+    return a_data;
+}
+
+int EhIgual( tData a_data1, tData a_data2 ){
+    return  a_data1.dia == a_data2.dia &&
+            a_data1.mes == a_data2.mes &&
+            a_data1.ano == a_data2.ano;
+}
+
+int EhMenorDataAqDataB(tData a, tData b){
+    if (a.ano < b.ano)
+        return 1;
+    else if (a.ano == b.ano && a.mes < b.mes)
+        return 1;
+    else if (a.ano == b.ano && a.mes == b.mes && a.dia < b.dia)
+        return 1;
+    
     return 0;
 }
