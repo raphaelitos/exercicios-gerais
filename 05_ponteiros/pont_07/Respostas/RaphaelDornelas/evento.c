@@ -6,7 +6,7 @@
 /// @param numElementos ponteiro para o numero de elementos do vetor
 /// @return 1 se for válido, 0 caso contrário.
 int ehIndiceValido(int * id, int *numElementos){
-    return *id >= 0 && *id <= *numElementos;
+    return *id >= 0 && *id < *numElementos;
 }
 
 /// @brief Lê um evento.
@@ -14,7 +14,7 @@ int ehIndiceValido(int * id, int *numElementos){
 void LeEvento(Evento *evento){
     scanf("%*[^A-Za-z]");
     scanf("%s", evento->nome);
-    scanf("%d %d %d", evento->dia, evento->mes, evento->ano);
+    scanf("%d %d %d", &evento->dia, &evento->mes, &evento->ano);
 }
 
 /// @brief Imprime mensagem indicando erro de indexacao.
@@ -23,15 +23,14 @@ void InvalidIDMsg(){
 }
 
 void cadastrarEvento(Evento* eventos, int* numEventos){
-    Evento *evenTemp;
-    LeEvento(evenTemp);
-
+    
     if(*numEventos == MAX_EVENTOS){
         printf("Limite de eventos atingido!\n");
         return;
     }
 
-    eventos[*numEventos] = *evenTemp;
+    LeEvento(&eventos[*numEventos]);
+
     printf("Evento cadastrado com sucesso!\n");
 }
 
@@ -50,7 +49,7 @@ void trocarDataEvento(Evento* eventos, int* numEventos){
         return;
     }
 
-    if(scanf("%d %d %d", eventos[id].dia, eventos[id].mes, eventos[id].ano) == 3){
+    if(scanf("%d %d %d", &eventos[id].dia, &eventos[id].mes, &eventos[id].ano) == 3){
         printf("Data modificada com sucesso!\n");
     }
     else{
@@ -65,8 +64,8 @@ void trocarIndicesEventos(Evento* eventos, int* indiceA, int* indiceB, int* numE
         return; 
     }
     
-    int aux = *indiceA;
-    *indiceA = *indiceB;
-    *indiceB = aux;
+    Evento aux = eventos[*indiceA];
+    eventos[*indiceA] = eventos[*indiceB];
+    eventos[*indiceB] = aux;
     printf("Eventos trocados com sucesso!\n");
 }

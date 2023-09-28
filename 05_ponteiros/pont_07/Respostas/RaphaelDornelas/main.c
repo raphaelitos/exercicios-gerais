@@ -22,6 +22,7 @@ int main()
         {
         case 1:
             cadastrarEvento(eventos, &numEventos);
+            numEventos++;
             break;
         case 2:
             exibirEventos(eventos, &numEventos);
