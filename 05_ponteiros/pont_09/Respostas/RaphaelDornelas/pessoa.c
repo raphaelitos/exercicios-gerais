@@ -67,6 +67,7 @@ void ImprimePessoa(tPessoa *pessoa){
 
 void AssociaFamiliasGruposPessoas(tPessoa *pessoas){
     int mae = 0, pai = 0, filho = 0;
+    scanf("%*[^0-9]");
     scanf("mae: %d, pai: %d, filho: %d", &mae, &pai, &filho);
 
     if(mae != -1)
