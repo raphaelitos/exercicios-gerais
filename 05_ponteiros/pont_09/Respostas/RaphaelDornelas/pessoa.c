@@ -46,8 +46,9 @@ void ImprimePessoa(tPessoa *pessoa){
     }
     printf("NOME COMPLETO: %s\n", (*pessoa).nome);
     
-    if(ExistemPais(*pessoa) == -1){
-        printf("");
+    if(ExistemPais(*pessoa) == 1){
+        printf("PAI: %s", );
+        printf("MAE: NAO INFORMADO\n");
     }
     
 }
