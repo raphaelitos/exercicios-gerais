@@ -12,12 +12,7 @@ int main(){
         LePessoa(&pessoas[i]);
     }
 
-    int numAssociacoes = 0;
-    scanf("%d", &numAssociacoes);
-
-    for(int a = 0; a < numAssociacoes; a++){
-        AssociaFamiliasGruposPessoas(pessoas);
-    }
+    AssociaFamiliasGruposPessoas(pessoas);
 
     for(int p = 0; p < numPessoas; p++){
         ImprimePessoa(pessoas);
