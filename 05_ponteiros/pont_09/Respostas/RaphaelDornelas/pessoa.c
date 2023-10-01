@@ -7,20 +7,21 @@
 /// @param pessoa pessoa a ser analisada
 /// @return 0 caso ela nao exista, valor maior que 0 caso contrário
 int ExistePessoa(tPessoa pessoa){
-    return strlen(pessoa.nome);
+    int tam = strlen(pessoa.nome);
+    return tam;
 }
 
 /// @brief verifica quantos pais uma pessoa tem.
 /// @param pessoa pessoa que será analisada
 /// @return -1 caso pessoa tenha apenas mae, 1 para apenas pai, 2 caso tenha os dois.
 int ExistemPais(tPessoa pessoa){
-    if(ExistePessoa(*pessoa.mae) && ExistePessoa(*pessoa.pai)){
+    if(ExistePessoa(*(pessoa.mae)) && ExistePessoa(*(pessoa.pai))){
         return 2;
     }
-    if(ExistePessoa(*pessoa.pai) && !ExistePessoa(*pessoa.mae)){
+    if(ExistePessoa(*(pessoa.pai)) && !ExistePessoa(*(pessoa.mae))){
         return 1;
     }
-    if(!ExistePessoa(*pessoa.pai) && ExistePessoa(*pessoa.mae)){
+    if(!ExistePessoa(*(pessoa.pai)) && ExistePessoa(*(pessoa.mae))){
         return -1;
     }
     return 0;
@@ -66,14 +67,17 @@ void ImprimePessoa(tPessoa *pessoa){
 }
 
 void AssociaFamiliasGruposPessoas(tPessoa *pessoas){
-    int mae = 0, pai = 0, filho = 0;
-
     int numAssociacoes = 0;
     scanf("%d", &numAssociacoes);
+    scanf("%*[^\n]");
+    int mae = 0, pai = 0, filho = 0;
 
     for(int a = 0; a < numAssociacoes; a++){
-        scanf("%*[^0-9]");
-        scanf("mae: %d, pai: %d, filho: %d", &mae, &pai, &filho);
+        //scanf("%*[^0-9]");
+        int teste = 0;
+        //scanf("%d", &teste);
+        scanf("\nmae: %d, ", &mae);
+        scanf("pai: %d, filho: %d", &pai, &filho);
         if(mae != -1)
         pessoas[filho].mae = &pessoas[mae];
         if(pai != -1)
