@@ -15,7 +15,7 @@ int main(){
     AssociaFamiliasGruposPessoas(pessoas);
 
     for(int p = 0; p < numPessoas; p++){
-        ImprimePessoa(pessoas);
+        ImprimePessoa(&pessoas[p]);
     }
 
     return 0;
