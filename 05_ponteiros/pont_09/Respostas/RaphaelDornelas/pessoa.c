@@ -4,10 +4,10 @@
 #include <string.h>
 
 /// @brief verifica se uma pessoa existe
-/// @param pessoa pessoa a ser analisada
+/// @param pessoa ponteiro para a pessoa a ser analisada
 /// @return 0 caso ela nao exista, valor maior que 0 caso contrário
-int ExistePessoa(tPessoa pessoa){
-    int tam = strlen(pessoa.nome);
+int ExistePessoa(tPessoa *pessoa){
+    int tam = strlen((*pessoa).nome);
     return tam;
 }
 
@@ -15,13 +15,13 @@ int ExistePessoa(tPessoa pessoa){
 /// @param pessoa pessoa que será analisada
 /// @return -1 caso pessoa tenha apenas mae, 1 para apenas pai, 2 caso tenha os dois.
 int ExistemPais(tPessoa pessoa){
-    if(ExistePessoa(*(pessoa.mae)) && ExistePessoa(*(pessoa.pai))){
+    if(ExistePessoa(pessoa.mae) && ExistePessoa(pessoa.pai)){
         return 2;
     }
-    if(ExistePessoa(*(pessoa.pai)) && !ExistePessoa(*(pessoa.mae))){
+    if(ExistePessoa(pessoa.pai) && !ExistePessoa(pessoa.mae)){
         return 1;
     }
-    if(!ExistePessoa(*(pessoa.pai)) && ExistePessoa(*(pessoa.mae))){
+    if(!ExistePessoa(pessoa.pai) && ExistePessoa(pessoa.mae)){
         return -1;
     }
     return 0;
