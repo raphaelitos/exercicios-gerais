@@ -50,7 +50,7 @@ void ImprimePessoa(tPessoa *pessoa){
         return;
     }
 
-    if(!ExistePessoa((*pessoa).pai) && !ExistePessoa((*pessoa).mae)){
+    if(!ExistemPais(pessoa)){
         return;
     }
     printf("NOME COMPLETO: %s\n", (*pessoa).nome);
@@ -61,12 +61,13 @@ void ImprimePessoa(tPessoa *pessoa){
     }
     else if(ExistemPais(pessoa) == -1){
         printf("PAI: NAO INFORMADO\n");
-        printf("MAE: %s\n", pessoa->pai->nome);
+        printf("MAE: %s\n", pessoa->mae->nome);
     }
     else{
         printf("PAI: %s\n", pessoa->pai->nome);
-        printf("MAE: %s\n", pessoa->pai->nome);
+        printf("MAE: %s\n", pessoa->mae->nome);
     }
+    printf("\n");
 }
 
 void AssociaFamiliasGruposPessoas(tPessoa *pessoas){
@@ -82,15 +83,14 @@ void AssociaFamiliasGruposPessoas(tPessoa *pessoas){
         
         tPessoa generic = CriaPessoa();
         
+        pessoas[filho].mae = &generic; 
+        pessoas[filho].pai = &generic;
+        //ponteiros devidamente inicializados
+
         if(mae != -1)
             pessoas[filho].mae = &pessoas[mae];
-        else{
-            pessoas[filho].mae = &generic;
-        }
         if(pai != -1)
             pessoas[filho].pai = &pessoas[pai];
-        else{
-            pessoas[filho].mae = &generic;
-        }
+       
     }
 }
