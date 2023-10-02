@@ -46,13 +46,14 @@ void LePessoa(tPessoa *pessoa){
 
 void ImprimePessoa(tPessoa *pessoa){
    
+    if((*pessoa).pai == NULL || (*pessoa).mae == NULL){
+        return;
+    }
+
     if(!ExistePessoa((*pessoa).pai) && !ExistePessoa((*pessoa).mae)){
         return;
     }
     printf("NOME COMPLETO: %s\n", (*pessoa).nome);
-    
-    tPessoa pai = *pessoa->pai;
-    tPessoa mae = *pessoa->mae;
 
     if(ExistemPais(pessoa) == 1){
         printf("PAI: %s\n", (*(*pessoa).pai).nome);
