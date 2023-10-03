@@ -3,9 +3,20 @@
 #include <stdlib.h>
 #include <string.h>
 
-/// @brief verifica se uma pessoa existe, ou seja, se ela foi inicializada
-/// @param pessoa ponteiro para a pessoa a ser analisada
-/// @return 1 caso a pessoa exista, 0 caso contrário
+// /// @brief verifica se uma pessoa existe
+// /// @param pessoa ponteiro para a pessoa a ser analisada
+// /// @return 0 caso ela nao exista, valor maior que 0 caso contrário
+// int ExistePessoa(tPessoa* pessoa){
+//     //printf("%c\n", pessoa->nome[0]);
+//     int tam = strlen(pessoa->nome);
+//     return tam;
+// }
+
+void genericPerson(tPessoa* pessoa){
+    *pessoa = CriaPessoa(*pessoa);
+    strcpy("NAO INFORMADO", pessoa->nome);
+}
+
 int ExistePessoa(tPessoa* pessoa){
     return pessoa != NULL;
 }
@@ -13,6 +24,19 @@ int ExistePessoa(tPessoa* pessoa){
 /// @brief Imprime msg de quando um parente nao foi informado
 void NoInfMsg(){
     printf("NAO INFORMADO\n");
+}
+
+/// @brief Verifica se a pessoa tem apenas pai, mae ou os dois
+/// @param pessoa ponteiro para a pessoa a ser analisada
+/// @return -1 se tiver apenas mae, 1 p/ apenas pai, 2 caso tenha os dois
+int TemPaiouMaePessoa(tPessoa* pessoa){
+    if(pessoa->mae == NULL){
+        if(pessoa->pai == NULL){
+            return 2;
+        }
+        return -1;
+    }
+    return 1;
 }
 
 int TemIrmaoPessoa(tPessoa* pessoa){
