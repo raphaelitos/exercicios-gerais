@@ -14,6 +14,23 @@ int ExistePessoa(tPessoa* pessoa){
     return tam;
 }
 
+/// @brief Verifica se a pessoa tem apenas pai, mae ou os dois
+/// @param pessoa ponteiro para a pessoa a ser analisada
+/// @return -1 se tiver apenas mae, 1 p/ apenas pai, 2 caso tenha os dois
+int TemPaiouMaePessoa(tPessoa* pessoa){
+    if(pessoa->mae == NULL){
+        if(pessoa->pai == NULL){
+            return 2;
+        }
+        return -1;
+    }
+    return 1;
+}
+
+int TemIrmaoPessoa(tPessoa* pessoa){
+    return(pessoa->irmao != NULL);
+}
+
 tPessoa CriaPessoa(){  
     tPessoa pessoatemp;
     
@@ -41,12 +58,27 @@ void ImprimePessoa(tPessoa *pessoa){
         return;
     }
 
-    if(!ExistemPais(pessoa)){
+    if(!VerificaSeTemPaisPessoa(pessoa)){
         return;
     }
+    
+    if(TemPaiouMaePessoa(pessoa) == -1){
+        strcpy("NAO INFORMADO", pessoa->pai->nome);
+    }
+    else if(TemPaiouMaePessoa(pessoa) == 1){
+        strcpy("NAO INFORMADO", pessoa->mae->nome);
+    }
+    if(!TemIrmaoPessoa(pessoa)){
+       strcpy("NAO INFORMADO", pessoa->irmao->nome); 
+    }
+    
     printf("NOME COMPLETO: %s\n", (*pessoa).nome);
-
-    if(ExistemPais(pessoa) == 1){
+    printf("PAI: %s\n", pessoa->pai->nome);
+    printf("MAE: %s\n", pessoa->mae->nome);
+    printf("IRMAO: %s\n", pessoa->irmao->nome);
+    printf("\n");
+    
+    /*if(ExistemPais(pessoa) == 1){
         printf("PAI: %s\n", (*(*pessoa).pai).nome);
         printf("MAE: NAO INFORMADO\n");
     }
@@ -58,7 +90,7 @@ void ImprimePessoa(tPessoa *pessoa){
         printf("PAI: %s\n", pessoa->pai->nome);
         printf("MAE: %s\n", pessoa->mae->nome);
     }
-    printf("\n");
+    printf("\n");*/
 }
 
 int VerificaIrmaoPessoa(tPessoa *pessoa1, tPessoa *pessoa2){
