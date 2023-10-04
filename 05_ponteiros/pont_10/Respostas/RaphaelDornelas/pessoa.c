@@ -47,6 +47,7 @@ void ImprimePessoa(tPessoa *pessoa){
     }
     
     printf("NOME COMPLETO: %s\n", (*pessoa).nome);
+    
     printf("PAI: ");
     if(ExistePessoa(pessoa->pai)) printf("%s\n", pessoa->pai->nome);
     else NoInfMsg();  
@@ -60,20 +61,6 @@ void ImprimePessoa(tPessoa *pessoa){
     else NoInfMsg();
    
     printf("\n");
-    
-    /*if(ExistemPais(pessoa) == 1){
-        printf("PAI: %s\n", (*(*pessoa).pai).nome);
-        printf("MAE: NAO INFORMADO\n");
-    }
-    else if(ExistemPais(pessoa) == -1){
-        printf("PAI: NAO INFORMADO\n");
-        printf("MAE: %s\n", pessoa->mae->nome);
-    }
-    else{
-        printf("PAI: %s\n", pessoa->pai->nome);
-        printf("MAE: %s\n", pessoa->mae->nome);
-    }
-    printf("\n");*/
 }
 
 int VerificaIrmaoPessoa(tPessoa *pessoa1, tPessoa *pessoa2){
@@ -95,7 +82,7 @@ void AssociaFamiliasGruposPessoas(tPessoa *pessoas, int numPessoas){
             pessoas[filho].mae = &pessoas[mae];
         if(pai != -1)
             pessoas[filho].pai = &pessoas[pai];
-    }
+    }//familiar association
     
     for(int i = 0; i < numPessoas - 1; i++){
         for(int v = i + 1; v < numPessoas; v++){

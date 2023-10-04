@@ -3,20 +3,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-// /// @brief verifica se uma pessoa existe
-// /// @param pessoa ponteiro para a pessoa a ser analisada
-// /// @return 0 caso ela nao exista, valor maior que 0 caso contrário
-// int ExistePessoa(tPessoa* pessoa){
-//     //printf("%c\n", pessoa->nome[0]);
-//     int tam = strlen(pessoa->nome);
-//     return tam;
-// }
-
-void genericPerson(tPessoa* pessoa){
-    *pessoa = CriaPessoa(*pessoa);
-    strcpy("NAO INFORMADO", pessoa->nome);
-}
-
+/// @brief verifica se uma pessoa existe, ou seja, se ela foi inicializada
+/// @param pessoa ponteiro para a pessoa a ser analisada
+/// @return 1 caso a pessoa exista, 0 caso contrário
 int ExistePessoa(tPessoa* pessoa){
     return pessoa != NULL;
 }
@@ -24,19 +13,6 @@ int ExistePessoa(tPessoa* pessoa){
 /// @brief Imprime msg de quando um parente nao foi informado
 void NoInfMsg(){
     printf("NAO INFORMADO\n");
-}
-
-/// @brief Verifica se a pessoa tem apenas pai, mae ou os dois
-/// @param pessoa ponteiro para a pessoa a ser analisada
-/// @return -1 se tiver apenas mae, 1 p/ apenas pai, 2 caso tenha os dois
-int TemPaiouMaePessoa(tPessoa* pessoa){
-    if(pessoa->mae == NULL){
-        if(pessoa->pai == NULL){
-            return 2;
-        }
-        return -1;
-    }
-    return 1;
 }
 
 int TemIrmaoPessoa(tPessoa* pessoa){
@@ -71,6 +47,7 @@ void ImprimePessoa(tPessoa *pessoa){
     }
     
     printf("NOME COMPLETO: %s\n", (*pessoa).nome);
+    
     printf("PAI: ");
     if(ExistePessoa(pessoa->pai)) printf("%s\n", pessoa->pai->nome);
     else NoInfMsg();  
@@ -84,20 +61,6 @@ void ImprimePessoa(tPessoa *pessoa){
     else NoInfMsg();
    
     printf("\n");
-    
-    /*if(ExistemPais(pessoa) == 1){
-        printf("PAI: %s\n", (*(*pessoa).pai).nome);
-        printf("MAE: NAO INFORMADO\n");
-    }
-    else if(ExistemPais(pessoa) == -1){
-        printf("PAI: NAO INFORMADO\n");
-        printf("MAE: %s\n", pessoa->mae->nome);
-    }
-    else{
-        printf("PAI: %s\n", pessoa->pai->nome);
-        printf("MAE: %s\n", pessoa->mae->nome);
-    }
-    printf("\n");*/
 }
 
 int VerificaIrmaoPessoa(tPessoa *pessoa1, tPessoa *pessoa2){
@@ -119,7 +82,7 @@ void AssociaFamiliasGruposPessoas(tPessoa *pessoas, int numPessoas){
             pessoas[filho].mae = &pessoas[mae];
         if(pai != -1)
             pessoas[filho].pai = &pessoas[pai];
-    }
+    }//familiar association
     
     for(int i = 0; i < numPessoas - 1; i++){
         for(int v = i + 1; v < numPessoas; v++){
