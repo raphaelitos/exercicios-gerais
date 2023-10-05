@@ -14,6 +14,11 @@ int VerificaSeTemPaisPessoa(tPessoa *pessoa){
     return(ExistePessoa(pessoa->pai) || ExistePessoa(pessoa->mae));
 }
 
+/// @brief Imprime msg de quando um parente nao foi informado
+void NoInfMsg(){
+    printf("NAO INFORMADO\n");
+}
+
 tPessoa CriaPessoa(){  
     tPessoa pessoatemp;
     
@@ -25,7 +30,7 @@ tPessoa CriaPessoa(){
 }
 
 void LePessoa(tPessoa *pessoa){
-    *pessoa = CriaPessoa();
+    //*pessoa = CriaPessoa();
     scanf("%*[^A-Za-z]");
     scanf("%[^\n]", pessoa->nome);
 }

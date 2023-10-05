@@ -9,13 +9,14 @@ int main(){
     tPessoa pessoas[numPessoas];
 
     for(int i = 0; i < numPessoas; i++){
-        LePessoa(&pessoas[i]);
+        pessoas[i] = CriaPessoa();
+        LePessoa(pessoas + i);
     }
 
     AssociaFamiliasGruposPessoas(pessoas);
 
     for(int p = 0; p < numPessoas; p++){
-        ImprimePessoa(&pessoas[p]);
+        ImprimePessoa(pessoas + p);
     }
 
     return 0;
