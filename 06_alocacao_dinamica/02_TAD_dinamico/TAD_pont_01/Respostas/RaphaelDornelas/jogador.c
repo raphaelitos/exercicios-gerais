@@ -43,6 +43,7 @@ void JogaJogador(tJogador* jogador, tTabuleiro* tabuleiro){
         else{
             printf("Posicao invalida (FORA DO TABULEIRO - [%d,%d] )!\n", ObtemJogadaX(jogada), ObtemJogadaY(jogada));
         }
+        DestroiJogada(jogada);
     }while(flag);
 
     return tabuleiro;

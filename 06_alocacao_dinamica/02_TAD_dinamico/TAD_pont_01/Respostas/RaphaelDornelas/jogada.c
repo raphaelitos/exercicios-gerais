@@ -29,7 +29,7 @@ void LeJogada(tJogada* jogada){
 }
 
 void DestroiJogada(tJogada* jogada){
-    free (jogada);
+    free(jogada);
 }
 
 int ObtemJogadaX(tJogada* jogada){

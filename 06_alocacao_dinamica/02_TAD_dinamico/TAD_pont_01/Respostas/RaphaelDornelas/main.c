@@ -7,6 +7,7 @@ int main(){
     do{
         pjogo = CriaJogo();
         ComecaJogo(pjogo);
+        DestroiJogo(pjogo);
     }while(ContinuaJogo());
 
     return 0;

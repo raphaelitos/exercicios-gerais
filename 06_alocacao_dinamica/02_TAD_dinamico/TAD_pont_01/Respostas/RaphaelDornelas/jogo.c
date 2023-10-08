@@ -62,3 +62,11 @@ int ContinuaJogo(){
 
     return (resposta == 's');
 }
+
+void DestroiJogo(tJogo* jogo){
+
+    DestroiJogador(jogo->jogador1);
+    DestroiJogador(jogo->jogador2);
+    DestroiTabuleiro(jogo->tabuleiro);
+    free(jogo);
+}
