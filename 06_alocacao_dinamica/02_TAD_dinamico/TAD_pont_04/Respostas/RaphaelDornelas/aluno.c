@@ -30,7 +30,7 @@ void LeAluno(tAluno *aluno){
         exit(0);
     }
     strcpy(nome, aluno->nome);
-    scanf("%3d", &(aluno->nome));
+    scanf("%3d", &(aluno->matricula));
     scanf("%d %d %d", &(aluno->n1), &(aluno->n2), &(aluno->n3));
     // printf("\nnome: %s", aluno.nome);
     // printf("\nMatricula: %d", aluno.matricula);
