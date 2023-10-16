@@ -24,17 +24,23 @@ void LeAluno(tAluno *aluno){
     char nome[50];
     scanf("%*[^A-Za-z]"); //limpeza.
     scanf("%s", nome);
+    //printf("leitura: %s", nome);
     aluno->nome = (char *) malloc((strlen(nome) + 1) * sizeof(char));
     if(aluno->nome == NULL){
         printf("Erro na alocacao [aluno->nome]\n");
         exit(0);
     }
-    strcpy(nome, aluno->nome);
+    strcpy(aluno->nome, nome);
     scanf("%3d", &(aluno->matricula));
     scanf("%d %d %d", &(aluno->n1), &(aluno->n2), &(aluno->n3));
-    // printf("\nnome: %s", aluno.nome);
+    //printf("\nnome: %s", aluno->nome);
     // printf("\nMatricula: %d", aluno.matricula);
     // printf("\nnotas: %d %d %d", aluno.n1, aluno.n2, aluno.n3);
+}
+
+void ApagaAluno(tAluno *aluno){
+    free(aluno->nome);
+    free(aluno);
 }
 
 int ComparaMatricula(tAluno* aluno1, tAluno* aluno2){
