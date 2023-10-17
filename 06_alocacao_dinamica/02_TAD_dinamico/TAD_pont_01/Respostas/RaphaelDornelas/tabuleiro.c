@@ -5,27 +5,28 @@
 tTabuleiro* CriaTabuleiro(){
     tTabuleiro* ptabTemp;
 
-    ptabTemp->posicoes = (char**) malloc(TAM_TABULEIRO * TAM_TABULEIRO * sizeof(int));
-
-    if(ptabTemp->posicoes == NULL){
-        exit(0);
-    }
-
-    ptabTemp = malloc((sizeof(tTabuleiro)));
+    ptabTemp = (tTabuleiro*) malloc((sizeof(tTabuleiro)));
 
     if(ptabTemp == NULL){
+        printf("erro de alocacao [ptabtemp]");
         exit(0);
     }
     
+    ptabTemp->posicoes = (char**) malloc(TAM_TABULEIRO * TAM_TABULEIRO * sizeof(char));
+
+    if(ptabTemp->posicoes == NULL){
+        printf("erro de alocacao [ptabTemp->posicoes]");
+        exit(0);
+    }
+
     ptabTemp->pecaVazio = '-';
     ptabTemp->peca1 = 'X';
     ptabTemp->peca2 = '0';
 
-
     int rows = 0, cols = 0;
     for(rows = 0; rows < TAM_TABULEIRO; rows++){
         for(cols = 0; cols < TAM_TABULEIRO; cols++){
-            ptabTemp->posicoes[rows][cols] = ptabTemp->pecaVazio;
+            (ptabTemp->posicoes)[rows][cols] = ptabTemp->pecaVazio;
         }
     }
 
