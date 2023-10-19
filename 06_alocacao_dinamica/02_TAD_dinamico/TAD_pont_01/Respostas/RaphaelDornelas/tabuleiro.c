@@ -12,7 +12,12 @@ tTabuleiro* CriaTabuleiro(){
         exit(0);
     }
     
-    ptabTemp->posicoes = (char**) malloc(TAM_TABULEIRO * TAM_TABULEIRO * sizeof(char));
+    //Alocacao de linhas [ponteiros na vertical]
+    ptabTemp->posicoes = (char**) malloc(TAM_TABULEIRO * sizeof(char));
+
+    for(int m = 0; m < TAM_TABULEIRO; m++){
+        ptabTemp->posicoes[m] = (char*) malloc(TAM_TABULEIRO * sizeof(char));
+    } //alocacao de colunas [vetores para o qual os ponteiros ja iniciados apontam]
 
     if(ptabTemp->posicoes == NULL){
         printf("erro de alocacao [ptabTemp->posicoes]");
@@ -26,7 +31,7 @@ tTabuleiro* CriaTabuleiro(){
     int rows = 0, cols = 0;
     for(rows = 0; rows < TAM_TABULEIRO; rows++){
         for(cols = 0; cols < TAM_TABULEIRO; cols++){
-            (ptabTemp->posicoes)[rows][cols] = ptabTemp->pecaVazio;
+            ptabTemp->posicoes[rows][cols] = ptabTemp->pecaVazio;
         }
     }
 
