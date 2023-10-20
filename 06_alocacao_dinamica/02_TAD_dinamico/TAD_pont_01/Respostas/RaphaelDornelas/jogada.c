@@ -18,7 +18,7 @@ tJogada* CriaJogada(){
 void LeJogada(tJogada* jogada){
 
     printf("Digite uma posicao (x e y):\n");
-    if(scanf("%d %d", &(jogada->x), &(jogada->y)) == 2){       
+    if(scanf("%d %d", &jogada->x, &jogada->y) == 2){       
         jogada->sucesso = 1;
     }
     else{

@@ -2,25 +2,38 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void DestroiPosicoesTabuleiro(tTabuleiro* tabuleiro){
+    for(int f = 0; f < TAM_TABULEIRO; f++){
+        free(tabuleiro->posicoes[f]);//desalocando vetores [linhas da matriz]
+    }
+    free(tabuleiro->posicoes);//desalocando ponteiros [verticais]
+}
+
 tTabuleiro* CriaTabuleiro(){
     tTabuleiro* ptabTemp;
 
-    ptabTemp->posicoes = (char**) malloc(TAM_TABULEIRO * TAM_TABULEIRO * sizeof(int));
-
-    if(ptabTemp->posicoes == NULL){
-        exit(0);
-    }
-
-    ptabTemp = malloc((sizeof(tTabuleiro)));
+    ptabTemp = (tTabuleiro*) malloc((sizeof(tTabuleiro)));
 
     if(ptabTemp == NULL){
+        printf("erro de alocacao [ptabtemp]");
         exit(0);
     }
     
+    //Alocacao de linhas [ponteiros na vertical]
+    ptabTemp->posicoes = (char**) malloc(TAM_TABULEIRO * sizeof(char));
+
+    for(int m = 0; m < TAM_TABULEIRO; m++){
+        ptabTemp->posicoes[m] = (char*) malloc(TAM_TABULEIRO * sizeof(char));
+    } //alocacao de colunas [vetores para o qual os ponteiros ja iniciados apontam]
+
+    if(ptabTemp->posicoes == NULL){
+        printf("erro de alocacao [ptabTemp->posicoes]");
+        exit(0);
+    }
+
     ptabTemp->pecaVazio = '-';
     ptabTemp->peca1 = 'X';
     ptabTemp->peca2 = '0';
-
 
     int rows = 0, cols = 0;
     for(rows = 0; rows < TAM_TABULEIRO; rows++){
@@ -29,11 +42,13 @@ tTabuleiro* CriaTabuleiro(){
         }
     }
 
+    //ImprimeTabuleiro(ptabTemp);
+    
     return ptabTemp;
 }
 
 void DestroiTabuleiro(tTabuleiro* tabuleiro){
-    free(tabuleiro->posicoes);
+    DestroiPosicoesTabuleiro(tabuleiro);
     free(tabuleiro);    
 }
 

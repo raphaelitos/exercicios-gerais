@@ -28,6 +28,7 @@ void JogaJogador(tJogador* jogador, tTabuleiro* tabuleiro){
     
     do{
         printf("Jogador %d\n", jogador->id);
+        jogada = CriaJogada();
         LeJogada(jogada);
         
         if(EhPosicaoValidaTabuleiro(ObtemJogadaX(jogada), ObtemJogadaY(jogada))){

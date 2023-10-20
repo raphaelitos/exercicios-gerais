@@ -26,11 +26,13 @@ void ComecaJogo(tJogo* jogo){
         ImprimeTabuleiro(jogo->tabuleiro);
         if(VenceuJogador(jogo->jogador1, jogo->tabuleiro)){
             printf("JOGADOR 1 Venceu!\n");
+            //DestroiJogo(jogo);
             break;
         }
 
         if(AcabouJogo(jogo)){
             printf("Sem vencedor!\n");
+            //DestroiJogo(jogo);
             break;
         }
 
@@ -38,11 +40,13 @@ void ComecaJogo(tJogo* jogo){
         ImprimeTabuleiro(jogo->tabuleiro);
         if(VenceuJogador(jogo->jogador2, jogo->tabuleiro)){
             printf("JOGADOR 2 Venceu!\n");
+            //DestroiJogo(jogo);
             break;
         }
 
         if(AcabouJogo(jogo)){
             printf("Sem vencedor!\n");
+            //DestroiJogo(jogo);
             break;
         }
 

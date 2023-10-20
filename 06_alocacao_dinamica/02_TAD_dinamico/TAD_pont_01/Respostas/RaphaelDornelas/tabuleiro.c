@@ -2,6 +2,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void DestroiPosicoesTabuleiro(tTabuleiro* tabuleiro){
+    for(int f = 0; f < TAM_TABULEIRO; f++){
+        free(tabuleiro->posicoes[f]);//desalocando vetores [linhas da matriz]
+    }
+    free(tabuleiro->posicoes);//desalocando ponteiros [verticais]
+}
+
 tTabuleiro* CriaTabuleiro(){
     tTabuleiro* ptabTemp;
 
@@ -35,11 +42,13 @@ tTabuleiro* CriaTabuleiro(){
         }
     }
 
+    //ImprimeTabuleiro(ptabTemp);
+    
     return ptabTemp;
 }
 
 void DestroiTabuleiro(tTabuleiro* tabuleiro){
-    free(tabuleiro->posicoes);
+    DestroiPosicoesTabuleiro(tabuleiro);
     free(tabuleiro);    
 }
 
