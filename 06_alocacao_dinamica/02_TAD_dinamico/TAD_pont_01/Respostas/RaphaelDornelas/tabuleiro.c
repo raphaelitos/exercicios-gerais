@@ -20,7 +20,7 @@ tTabuleiro* CriaTabuleiro(){
     }
     
     //Alocacao de linhas [ponteiros na vertical]
-    ptabTemp->posicoes = (char**) malloc(TAM_TABULEIRO * sizeof(char));
+    ptabTemp->posicoes = (char**) malloc(TAM_TABULEIRO * sizeof(char*));
 
     for(int m = 0; m < TAM_TABULEIRO; m++){
         ptabTemp->posicoes[m] = (char*) malloc(TAM_TABULEIRO * sizeof(char));
