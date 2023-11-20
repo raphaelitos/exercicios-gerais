@@ -1,60 +1,39 @@
-/*#include "conta.h"
+#include "banco.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 int main(){
-
-    int num = 0, opcao = 0;
+    tBanco* banco = CriaBanco();
+    char opcao = '\0';
+    int num = 0;
     int id = 0, pos = 0, valor = 0;
 
-    scanf("%d", &num);
-    tConta contas[num];
     while(1){
-        scanf("%d", &opcao);
+        scanf("%c\n", &opcao);
         switch (opcao)
         {
-        case 1:
-            scanf("%d %d", &id, &valor);
-            for(int c = 0; c < num; c++){
-                if(VerificaConta(contas[c], id)){
-                    contas[c] = SaqueConta(contas[c], valor);
-                    break;
-                }
-            }
+        case 'A':
+            AbreContaBanco(banco);
             break;
-        
-        case 2:
-            scanf("%d %d", &id, &valor);
-            for(int c = 0; c < num; c++){
-                if(VerificaConta(contas[c], id)){
-                    contas [c] = DepositoConta(contas[c], valor);
-                    break;
-                }
-            }        
+        case 'D':
+            DepositoContaBanco(banco);      
             break;
-        case 3:
-            char nome[50];
-            char cpf[15];
-            scanf("%*[^A-Za-z]");
-            scanf("%s %s %d", nome, cpf, &id);
-            contas[pos++] = CriaConta(id, CriaUsuario(nome, cpf));
-            for(int c = 0; c < num; c++){
-                if(VerificaConta(contas[c], id)){
-                    contas[c] = CriaConta(id, CriaUsuario(nome, cpf));
-                    break;
-                }
-            }
+        case 'S':
+            SaqueContaBanco(banco);
             break;
-        case 0:
-            printf("===| Imprimindo Relatorio |===\n");
-            for(int c = 0; c < num; c++){
-                ImprimeConta(contas[c]);
-                printf("\n");
-            }
+        case 'T':
+            TransferenciaContaBanco(banco);
+            break;  
+        case 'R':
+            ImprimeRelatorioBanco(banco);
+            break;
+        case 'F':
+            DestroiBanco(banco);
             exit(0);
         default:
+            printf("Opcao invalida\n");
             break;
         }
     }
     return 0;
-}*/
+}

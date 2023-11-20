@@ -26,7 +26,7 @@ void DestroiConta(tConta *conta){
 
 void LeConta(tConta *conta){
     LeUsuario(conta->user);
-    scanf("%d", &(conta->numero));
+    scanf("%d\n", &(conta->numero));
 }
 
 void ImprimeConta(tConta* conta){
@@ -40,8 +40,8 @@ int VerificaConta(tConta* conta, int numero){
 }
 
 void SaqueConta(tConta* conta, float valor){
-    if(conta->saldo >= valor){
-        conta->saldo -= valor;
+    if((conta->saldo) >= valor){
+        (conta->saldo) -= valor;
     }
     else{
         printf("voce nao tem esse dinheiro :(");
@@ -54,7 +54,7 @@ void DepositoConta(tConta* conta, float valor){
 
 void TransferenciaConta(tConta *destino, tConta *origem, float valor){
     if(valor > (origem->saldo)){
-        printf("ERRO: saldo insuficiente para depósito");
+        printf("ERRO: saldo insuficiente para transferencia");
         return;
     }
     (destino->saldo) += valor;
