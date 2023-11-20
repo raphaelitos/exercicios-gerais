@@ -6,47 +6,57 @@
 
 tConta *CriaConta(){
     tConta* pconta = (tConta*) malloc(sizeof(tConta));
-    /*scanf("%*[^0-9");
-    pconta.numero = numero;
-    pconta.user = user;
-    pconta.saldo = 0.0;*/
+    
     if(pconta == NULL){
         printf("erro na alocacao [pconta]");
         exit(0);
     }
 
     pconta->numero = -1;
-    pconta->saldo = -1;
-    pconta->user = (tUsuario*)malloc(sizeof(tUsuario));
-    if(pconta->user == NULL){
-        printf("erro na alocacao [pconta->user]");
-        exit(0);
-    }
+    pconta->saldo = 0;
+    pconta->user = CriaUsuario();
 
     return pconta;
 }
 
-void ImprimeConta(tConta conta){
-    printf("Conta: %d\n", conta.numero);
-    printf("Saldo: R$ %.2f\n", conta.saldo);
-    ImprimeUsuario(conta.user);
+void DestroiConta(tConta *conta){
+    DestroiUsuario(conta->user);
+    free(conta);
 }
 
-int VerificaConta(tConta conta, int numero){
-    return(conta.numero == numero);
+void LeConta(tConta *conta){
+    LeUsuario(conta->user);
+    scanf("%d", &(conta->numero));
 }
 
-tConta SaqueConta(tConta conta, float valor){
-    if(conta.saldo >= valor){
-        conta.saldo -= valor;
+void ImprimeConta(tConta* conta){
+    printf("Conta: %d\n", conta->numero);
+    printf("Saldo: R$ %.2f\n", conta->saldo);
+    ImprimeUsuario(conta->user);
+}
+
+int VerificaConta(tConta* conta, int numero){
+    return((conta->numero) == numero);
+}
+
+void SaqueConta(tConta* conta, float valor){
+    if((conta->saldo) >= valor){
+        (conta->saldo) -= valor;
     }
     else{
         printf("voce nao tem esse dinheiro :(");
     }
-    return conta;
 }
 
-tConta DepositoConta(tConta conta, float valor){
-    conta.saldo += valor;
-    return conta;
+void DepositoConta(tConta* conta, float valor){
+    (conta->saldo) += valor;
+}
+
+void TransferenciaConta(tConta *destino, tConta *origem, float valor){
+    if(valor > (origem->saldo)){
+        printf("ERRO: saldo insuficiente para depósito");
+        return;
+    }
+    (destino->saldo) += valor;
+    (origem->saldo) -= valor;
 }

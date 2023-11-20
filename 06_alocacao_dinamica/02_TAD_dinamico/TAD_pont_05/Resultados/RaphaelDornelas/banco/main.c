@@ -1,4 +1,4 @@
-#include "conta.h"
+/*#include "conta.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -38,12 +38,12 @@ int main(){
             scanf("%*[^A-Za-z]");
             scanf("%s %s %d", nome, cpf, &id);
             contas[pos++] = CriaConta(id, CriaUsuario(nome, cpf));
-            /*for(int c = 0; c < num; c++){
+            for(int c = 0; c < num; c++){
                 if(VerificaConta(contas[c], id)){
                     contas[c] = CriaConta(id, CriaUsuario(nome, cpf));
                     break;
                 }
-            }*/
+            }
             break;
         case 0:
             printf("===| Imprimindo Relatorio |===\n");
@@ -57,4 +57,4 @@ int main(){
         }
     }
     return 0;
-}
+}*/
