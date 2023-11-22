@@ -41,7 +41,7 @@ data_type VectorGet(Vector *v, int i){
 
 int VectorSize(Vector *v){
     if(v) return(v->numElem);
-    return NULL;
+    return 0;
 }
 
 void VectorDestroy(Vector *v, void (*destroy)(data_type)){
