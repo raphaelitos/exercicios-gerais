@@ -41,7 +41,7 @@ tAgendaTarefas* CriaAgendaDeTarefas(int numElem){
 void DestroiTarefa(tTarefa* t){
     if(t != NULL){
         if(t->conteudo != NULL){
-            t->destroi(t->conteudo);
+            free(t->conteudo);
         }
         free(t);
     }
@@ -76,10 +76,6 @@ void CadastraTarefaNaAgenda(tAgendaTarefas* tar, int prioridade, void *tarefa, v
         printf("agenda ou vetor de tarefas invalido\n");
         return;
     }
-    if(tar->nAlnAlocados > tar->nElementos){
-        tar->tarefas = realloc(tar->tarefas, tar->nElementos * sizeof(tTarefa*)); //a new chunk with the actual size    
-        tar->nElementos += tar->nElementos;
-    }
     tar->tarefas[tar->nAlnAlocados] = CadastraTarefa(prioridade, tarefa, executa, destroi);
     (tar->nAlnAlocados)++;
 }
@@ -92,6 +88,11 @@ int Comparar(tTarefa* t1, tTarefa* t2){
     return(t2->prioridade - t1->prioridade);
 }
 
+void TrocaElemento(tTarefa* t1, tTarefa* t2){
+    tTarefa *temp = t1;
+    t1 = t2;
+    t2 = temp;
+}
 
 void OrdenaTarefas(tTarefa** tarefas, int tam){
     

@@ -12,17 +12,19 @@ typedef struct tarefa{
 }tTarefa;
 
 struct agendatarefas{
-    int numElementos;
+    int nAlnAlocados;
+    int nElementos;
     tTarefa** tarefas;
 };
 
 tAgendaTarefas* CriaAgendaDeTarefas(int numElem){
-    tAgendaTarefas* agI = (tAgendaTarefas* )malloc(sizeof(tAgendaTarefas));
+    tAgendaTarefas *agI = (tAgendaTarefas*)malloc(sizeof(tAgendaTarefas));
     if(agI == NULL){
         printf("Falha ao alocar nova agenda!\n");
         exit(0);
     }
-    agI->numElementos = 0;
+    agI->nElementos = numElem;
+    agI->nAlnAlocados = 0;
     agI->tarefas = (tTarefa**) malloc(numElem * sizeof(tTarefa*));
     if(agI->tarefas == NULL){
         printf("Falha ao alocar nova tarefas!\n");
@@ -39,16 +41,15 @@ tAgendaTarefas* CriaAgendaDeTarefas(int numElem){
 void DestroiTarefa(tTarefa* t){
     if(t != NULL){
         if(t->conteudo != NULL){
-            free(t->conteudo);
+            t->destroi(t->conteudo);
         }
         free(t);
     }
 }
 
 void DestroiAgendaDeTarefas(tAgendaTarefas* tar){
-    if(tar == NULL) return;
-    if(tar->tarefas != NULL){
-        for(int i = 0; i < tar->numElementos; i++){
+    if(tar != NULL && tar->tarefas != NULL){
+        for(int i = 0; i < tar->nAlnAlocados; i++){
             DestroiTarefa(tar->tarefas[i]);
         }
         free(tar->tarefas);
@@ -75,8 +76,12 @@ void CadastraTarefaNaAgenda(tAgendaTarefas* tar, int prioridade, void *tarefa, v
         printf("agenda ou vetor de tarefas invalido\n");
         return;
     }
-    tar->tarefas[tar->numElementos] = CadastraTarefa(prioridade, tarefa, executa, destroi);
-    (tar->numElementos)++;
+    if(tar->nAlnAlocados > tar->nElementos){
+        tar->tarefas = realloc(tar->tarefas, tar->nElementos * sizeof(tTarefa*)); //a new chunk with the actual size    
+        tar->nElementos += tar->nElementos;
+    }
+    tar->tarefas[tar->nAlnAlocados] = CadastraTarefa(prioridade, tarefa, executa, destroi);
+    (tar->nAlnAlocados)++;
 }
 
 void ExecutaTarefa(tTarefa* t){
@@ -111,9 +116,9 @@ void OrdenaTarefas(tTarefa** tarefas, int tam){
 
 void ExecutarTarefasDaAgenda(tAgendaTarefas* tar){
     
-    OrdenaTarefas(tar->tarefas, tar->numElementos);
+    OrdenaTarefas(tar->tarefas, tar->nAlnAlocados);
     
-    for(int t = 0; t < tar->numElementos; t++){
+    for(int t = 0; t < tar->nAlnAlocados; t++){
         ExecutaTarefa(tar->tarefas[t]);
     }
 }
