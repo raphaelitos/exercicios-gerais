@@ -92,11 +92,6 @@ int Comparar(tTarefa* t1, tTarefa* t2){
     return(t2->prioridade - t1->prioridade);
 }
 
-void TrocaElemento(tTarefa* t1, tTarefa* t2){
-    tTarefa *temp = t1;
-    t1 = t2;
-    t2 = temp;
-}
 
 void OrdenaTarefas(tTarefa** tarefas, int tam){
     
