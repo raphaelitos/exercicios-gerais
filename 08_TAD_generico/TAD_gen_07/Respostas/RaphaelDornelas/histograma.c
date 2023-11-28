@@ -6,7 +6,7 @@
 
 struct tHistograma
 {
-    int *nPixels;
+    int nPixels;
     int nIntervalos;
     int tamIntervalos;
     int *vetHistograma;
@@ -47,13 +47,7 @@ Histograma *CalcularHistograma(Imagem *img, int nIntervalos){
 
     h->nIntervalos = nIntervalos;
     h->tamIntervalos = (int)ceil(256.0 / nIntervalos);
-    
-    h->nPixels = (int*) malloc (sizeof(int));
-    if (h->nPixels == NULL) {
-        printf("Falha em alocar memoria para o numero de pixels!\n");
-        exit(0);
-    }
-    (*h->nPixels) = ObterAltura(img) * ObterAltura(img);
+    h->nPixels = ObterAltura(img) * ObterAltura(img);
 
     h->vetHistograma = (int*)malloc(nIntervalos * sizeof(int));
     if(h->vetHistograma == NULL){
@@ -67,16 +61,17 @@ Histograma *CalcularHistograma(Imagem *img, int nIntervalos){
 
     //Contagem do histograma
     for(int c = 0; c < (ObterAltura(img) * ObterLargura(img)); c++){
-        int id = copia[c]/nIntervalos;
+        int id = copia[c]/h->tamIntervalos;
         
         if(0 <= id && id <= h->nIntervalos){
-            h->vetHistograma[id - 1]++;
+            h->vetHistograma[id]++;
         }
         else{
             printf("aiai:/\n");
         }
     }//
 
+    free(copia);
     return h;
 }
 
@@ -92,7 +87,6 @@ void DestruirHistograma(Histograma *histograma){
     if(histograma == NULL){
         return;
     }
-    free(histograma->nPixels);
     free(histograma->vetHistograma);
     free(histograma);
 }
