@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 struct tHistograma
 {
@@ -22,7 +23,7 @@ Histograma *CalcularHistograma(Imagem *img, int nIntervalos){
         exit(0);
     }
     
-    void *copia = malloc(sizeof(int) * ObterAltura(img) * ObterLargura(img));
+    int *copia = (int *)malloc(sizeof(int) * ObterAltura(img) * ObterLargura(img));
     if(copia == NULL){
         printf("falha em criar copia de dados\n");
         exit(0);
@@ -31,11 +32,11 @@ Histograma *CalcularHistograma(Imagem *img, int nIntervalos){
     if (ObterTipoImagem(img) == FLOAT){
 
         for (int i = 0; i < ObterAltura(img) * ObterLargura(img); i++){
-            ((int *)copia)[i] = (int)(((float*)ObterDadosImagem(img))[i] * 255);
+            copia[i] = (int)(((float*)ObterDadosImagem(img))[i] * 255);
         }
     }
     else{
-        memcpy(copia, ObterDadosImagem(img), sizeof(int) * ObterAltura(img) * ObterLargura(img));
+        memcpy(copia, (int*)ObterDadosImagem(img), sizeof(int) * ObterAltura(img) * ObterLargura(img));
     }
 
     Histograma *h = (Histograma*) malloc(sizeof(Histograma));
@@ -43,6 +44,16 @@ Histograma *CalcularHistograma(Imagem *img, int nIntervalos){
         printf("falha na criacao de histograma!\n");
         exit(0);
     }
+
+    h->nIntervalos = nIntervalos;
+    h->tamIntervalos = (int)ceil(256.0 / nIntervalos);
+    
+    h->nPixels = (int*) malloc (sizeof(int));
+    if (h->nPixels == NULL) {
+        printf("Falha em alocar memoria para o numero de pixels!\n");
+        exit(0);
+    }
+    (*h->nPixels) = ObterAltura(img) * ObterAltura(img);
 
     h->vetHistograma = (int*)malloc(nIntervalos * sizeof(int));
     if(h->vetHistograma == NULL){
@@ -56,7 +67,32 @@ Histograma *CalcularHistograma(Imagem *img, int nIntervalos){
 
     //Contagem do histograma
     for(int c = 0; c < (ObterAltura(img) * ObterLargura(img)); c++){
-        int id = 0;
-        h->vetHistograma[id]++;
+        int id = copia[c]/nIntervalos;
+        
+        if(0 <= id && id <= h->nIntervalos){
+            h->vetHistograma[id - 1]++;
+        }
+        else{
+            printf("aiai:/\n");
+        }
     }//
+
+    return h;
+}
+
+void MostrarHistograma(Histograma *histograma){
+    for(int h = 0; h < histograma->nIntervalos; h++){
+        int fim = (h + 1)*(histograma->tamIntervalos);
+        int inicio = h * (histograma->tamIntervalos);
+        printf("[%d, %d): %d\n", inicio, fim, histograma->vetHistograma[h]);
+    }
+}
+
+void DestruirHistograma(Histograma *histograma){
+    if(histograma == NULL){
+        return;
+    }
+    free(histograma->nPixels);
+    free(histograma->vetHistograma);
+    free(histograma);
 }
